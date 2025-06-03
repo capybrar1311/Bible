@@ -18,14 +18,13 @@ public class App
     public static async Task GetData()
     {
         var client = new HttpClient();
-        var verseNumber = "john%203:16";
         string requestUrl = $"https://bible-api.com/{GetVerseNumber()}?translation=web";
         var response = await client.GetStringAsync(requestUrl);
         var verse = JsonSerializer.Deserialize<BibleVerse>(response);
         PrintTheVerses(verse.Verses);
     }
-    
-    public static void PrintTheVerses(List<BibleVerse.Verse> vvv)
+
+    private static void PrintTheVerses(List<BibleVerse.Verse> vvv)
     {
         foreach (var ver in vvv)
         {
