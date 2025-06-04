@@ -1,10 +1,7 @@
 ﻿using System.Text.Json;
 
-namespace Bible;
 
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+namespace Bible;
 
 public class App
 {
@@ -13,11 +10,24 @@ public class App
     
     public static async Task GetData(string userInput)
     {
-        var client = new HttpClient();
-        string requestUrl = $"https://bible-api.com/{userInput}?translation=web";
-        var response = await client.GetStringAsync(requestUrl);
-        var verse = JsonSerializer.Deserialize<BibleVerse>(response);
-        PrintTheVerses(verse.Verses);
+            var client = new HttpClient();
+        try
+        {
+            string requestUrl = $"https://bible-api.com/{userInput}?translation=web";
+            var response = await client.GetStringAsync(requestUrl);
+        
+            var verse = JsonSerializer.Deserialize<BibleVerse>(response, MyJsonContext.Default.BibleVerse);
+            PrintTheVerses(verse.Verses);
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Console.ReadLine();
+            throw;
+        }
+        
+        
     }
 
     private static void PrintTheVerses(List<BibleVerse.Verse> vvv)
