@@ -9,16 +9,12 @@ using System.Threading.Tasks;
 public class App
 {
     
-    static string? GetVerseNumber()
-    {
-        Console.Write("Enter book and verse number ");
-        return Console.ReadLine();
-    }
     
-    public static async Task GetData()
+    
+    public static async Task GetData(string userInput)
     {
         var client = new HttpClient();
-        string requestUrl = $"https://bible-api.com/{GetVerseNumber()}?translation=web";
+        string requestUrl = $"https://bible-api.com/{userInput}?translation=web";
         var response = await client.GetStringAsync(requestUrl);
         var verse = JsonSerializer.Deserialize<BibleVerse>(response);
         PrintTheVerses(verse.Verses);
@@ -28,7 +24,7 @@ public class App
     {
         foreach (var ver in vvv)
         {
-            Console.WriteLine($"{ver.BookName} {ver.Chapter}:{ver.VerseNumber} - {ver.Text?.Trim()}");
+            Console.WriteLine($"{ver.BookName} {ver.Chapter}:{ver.VerseNumber} - {ver.Text?.Trim()}\n");
         }
     }
     
