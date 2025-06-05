@@ -3,4 +3,4 @@
 namespace Bible;
 
 [JsonSerializable(typeof(BibleVerse))]
-public partial class MyJsonContext : JsonSerializerContext { }
+public partial class MyJsonContext : JsonSerializerContext;

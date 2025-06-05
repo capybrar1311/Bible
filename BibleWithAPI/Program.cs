@@ -11,7 +11,8 @@ public class Program
         while (true)
         {
             Console.WriteLine("Enter \"exit\" to exit");
-            string? input = GetVerseNumber();
+            
+            string? input = Menu.GetVerseNumber(Menu.SetLanguage());
             if (input == "exit")
             {
                 
@@ -25,11 +26,6 @@ public class Program
         
     }
     
-    static string? GetVerseNumber()
-    {
-        Console.Write("Enter book and verse number ");
-        
-        return Console.ReadLine();
-    }
+    
     
 }
