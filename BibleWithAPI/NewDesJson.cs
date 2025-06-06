@@ -2,5 +2,8 @@
 
 namespace Bible;
 
-[JsonSerializable(typeof(BibleVerse))]
-public partial class MyJsonContext : JsonSerializerContext;
+[JsonSerializable(typeof(EnBible))]
+public partial class EnJsonContext : JsonSerializerContext;
+
+//[JsonSerializable(typeof(RusBible))]
+//public partial class RuJsonContext : JsonSerializerContext;

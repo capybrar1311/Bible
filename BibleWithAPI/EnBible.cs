@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-public class BibleVerse
+public class EnBible
 {
     
     [JsonPropertyName("reference")]

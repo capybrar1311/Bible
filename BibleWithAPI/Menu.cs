@@ -2,6 +2,7 @@
 
 public class Menu
 {
+    public static HttpClient client = new HttpClient();
     public static string? SetLanguage()
     {
         Console.Write("Enter language (\"ru\", \"en\")");
@@ -18,16 +19,14 @@ public class Menu
                 Console.Write("Enter book and verse number ");
                 Console.ReadLine();
                 if (res == "") return "john 3:16";
-                App.GetData(res).GetAwaiter().GetResult();
+                APIManagerEn.GetData(res).GetAwaiter().GetResult();
                 break;
             case "ru":
                 Console.Write("Введите книгу и номер стиха ");
-                res = Console.ReadLine(); 
+                res = Console.ReadLine();
                 if (res == "") return "Бытие 3:1";
-                App.GetDataRu(res).GetAwaiter().GetResult();
+                // APIManagerRu.GetDataRu(res).GetAwaiter().GetResult();
                 break;
-            
-            
         }
 
         return res;
