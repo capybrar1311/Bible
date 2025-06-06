@@ -18,7 +18,7 @@ public class Program
                 
                 break;
             }
-            App.GetData(input).GetAwaiter().GetResult();
+            
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
             Console.Clear();

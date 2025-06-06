@@ -16,13 +16,15 @@ public class Menu
         {
             case "en":
                 Console.Write("Enter book and verse number ");
-                res = Console.ReadLine();
+                Console.ReadLine();
                 if (res == "") return "john 3:16";
+                App.GetData(res).GetAwaiter().GetResult();
                 break;
             case "ru":
                 Console.Write("Введите книгу и номер стиха ");
                 res = Console.ReadLine(); 
-                if (res == "") return "john 3:16";
+                if (res == "") return "Бытие 3:1";
+                App.GetDataRu(res).GetAwaiter().GetResult();
                 break;
             
             
