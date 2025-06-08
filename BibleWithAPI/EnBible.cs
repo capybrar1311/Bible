@@ -29,10 +29,7 @@ public class EnBible
     [JsonPropertyName("translation_note")]
     public string? TranslationNote { get; set; }
 
-    public string ToString(int bbb)
-    {
-        return $"{Reference} - {Text?.Trim()}";
-    }
+    
     
     public class Verse
     {
