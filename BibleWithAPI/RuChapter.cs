@@ -2,29 +2,27 @@
 
 namespace Bible;
 
-public class RuChapter : RuBibleVerse
+public class RuChapter : List<RuBibleVerse>
 {
-    private int lastIndex = 0;
+    
+    private static List<RuBibleVerse> chapter = new List<RuBibleVerse>();
+    public string bookName = chapter[0].BookName;
 
-    public List<RuBibleVerse> MakeChapter(List<RuBibleVerse> verses)
+    public void MakeChapter(List<RuBibleVerse> verses)
     {
-        List<RuBibleVerse> chapter = new List<RuBibleVerse>();
-        int check = verses[lastIndex].Chapter;
-        for (int i = lastIndex; i < verses.Count; i++)
+        var currentChapter = new RuChapter();
+        for (int i = 0; i < verses.Count-1; i++)
         {
-            if (verses[i].Chapter == check)
+            if (verses[i].Chapter == verses[i+1].Chapter)
             {
-                chapter.Add(verses[i]);
+                currentChapter.Add(verses[i]);
             }
-            else
+            else if (verses[i].Chapter != verses[i+1].Chapter)
             {
-                lastIndex = i;
-                
-                chapter = new List<RuBibleVerse>();
+                RuBible.allChapters.Add(currentChapter);
+                currentChapter = new RuChapter();
             }
         }
-        return chapter;
     }
-
-
+    
 }

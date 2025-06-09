@@ -1,18 +1,27 @@
 ﻿namespace Bible;
 
-public class RuBook : RuChapter
+public class RuBook : List<RuChapter>
 {
-    public string Name { get; set; }
+    public static List<RuChapter> book = new List<RuChapter>();
+    public string bookName =  book[0].bookName;
     
     
-    List<RuChapter> Book = Makebook(RuChapter.());
-    public List<RuChapter> Makebook(List<RuChapter> chapters)
+    public void Makebook(List<RuChapter> chapters)
     {
-        List<RuChapter> book = new List<RuChapter>();
-        foreach (var chapter in chapters)
+        RuBook currentBook = new RuBook();
+        for (int i = 0; i < chapters.Count-1; i++)
         {
-            book.Add(chapter);
+            if (chapters[i].bookName == chapters[i+1].bookName)
+            {
+                book.Add(chapters[i]);
+            }
+            else if (chapters[i].bookName != chapters[i+1].bookName)
+            {
+                RuBook.book.Add(chapters[i]);
+                RuBible.allBooks.Add(currentBook);
+                currentBook = new RuBook();
+            }
         }
-        return book;
+       
     }
 }

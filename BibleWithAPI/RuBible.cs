@@ -2,7 +2,7 @@
 
 public class RuBible
 {
-    public List<RuBook> = RuBook.Makebook;
-    
+    public static List<RuChapter> allChapters = new List<RuChapter>();
+    public static List<RuBook> allBooks = new List<RuBook>();
     
 }
