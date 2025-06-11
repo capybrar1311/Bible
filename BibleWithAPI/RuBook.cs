@@ -6,8 +6,9 @@ public class RuBook : List<RuChapter>
     public string bookName =  book[0].bookName;
     
     
-    public void Makebook(List<RuChapter> chapters)
+    public static List<RuBook> Makebooks(List<RuChapter> chapters)
     {
+        var allbk = new List<RuBook>();
         RuBook currentBook = new RuBook();
         for (int i = 0; i < chapters.Count-1; i++)
         {
@@ -22,6 +23,7 @@ public class RuBook : List<RuChapter>
                 currentBook = new RuBook();
             }
         }
-       
+
+        return allbk;
     }
 }

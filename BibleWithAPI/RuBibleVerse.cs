@@ -23,16 +23,5 @@ public class RuBibleVerse
     [JsonPropertyName("book_name")]
     public string BookName { get; set; }
     
-    public List<RuBibleVerse?> Verses { get; set; }
-    
-    public void GetVerses(string book)
-    {
-        var json = File.ReadAllLines($"rst.json");
-        foreach (var line in json)
-        {
-            Verses.Add(JsonSerializer.Deserialize<RuBibleVerse>(line, RuJsonContext.Default.RuBibleVerse));
-        }
-        
-    }
     
 }
