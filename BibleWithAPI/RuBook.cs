@@ -4,28 +4,18 @@ namespace BibleWithAPI;
 
 public class RuBook : List<RuChapter>
 {
-    public static List<RuChapter> book = new List<RuChapter>();
-    public string bookName =  book[0].bookName;
+    public List<RuChapter> book = new List<RuChapter>();
+    public string Name { get; set; }
+    public string Id { get; set; }
     
-    public static List<RuBook> Makebooks(List<RuChapter> chapters)
+    public void AddVerse(RuBibleVerse verse)
     {
-        var allbk = new List<RuBook>();
-        List<RuChapter> book = new List<RuChapter>();
-        RuBook currentBook = new RuBook();
-        for (int i = 0; i < chapters.Count-1; i++)
+        RuChapter chapter = book.Find(c => c.Number == verse.Chapter);
+        if (chapter == null)
         {
-            if (chapters[i].bookName == chapters[i+1].bookName)
-            {
-                book.Add(chapters[i]);
-            }
-            else if (chapters[i].bookName != chapters[i+1].bookName)
-            {
-                book.Add(chapters[i]);
-                RuBible.allBooks.Add(currentBook);
-                currentBook = new RuBook();
-            }
+            chapter = new RuChapter { Number = verse.Chapter };
+            book.Add(chapter);
         }
-
-        return allbk;
+        chapter.AddVerse(verse);
     }
 }
