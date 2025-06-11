@@ -1,4 +1,4 @@
-﻿namespace Bible;
+﻿namespace BibleWithAPI;
 
 public class Menu
 {

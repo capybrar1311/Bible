@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Bible;
+namespace BibleWithAPI;
 
 public class RuChapter : List<RuBibleVerse>
 {
@@ -29,13 +29,17 @@ public class RuChapter : List<RuBibleVerse>
         return allchapt;
     }
     
-    public static List<RuBibleVerse> GetVerses(string book)
+    public static List<string> GetVerses(string book)
     {
-        List<RuBibleVerse?> Verses = new List<RuBibleVerse?>();
-        var json = File.ReadAllLines($"C:\\Users\\Lyamin_A_Admin\\RiderProjects\\Bible\\BibleWithAPI\\rst.json");
+        List<string?> Verses = new List<string?>();
+        var json = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), $"rst.json"));
+        if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), $"rst.json")))
+        {
+            Console.WriteLine("File not found");
+        }
         foreach (var line in json)
         {
-            Verses.Add(JsonSerializer.Deserialize<RuBibleVerse>(line, RuJsonContext.Default.RuBibleVerse));
+            Verses.Add(JsonSerializer.Deserialize<string>(line));
         }
 
         return Verses;

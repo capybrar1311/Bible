@@ -1,7 +1,4 @@
-﻿using System.Text.Json;
-
-
-namespace Bible;
+﻿namespace BibleWithAPI;
 
 public class RuBibleManager
 {

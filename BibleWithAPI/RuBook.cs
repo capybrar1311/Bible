@@ -1,7 +1,11 @@
-﻿namespace Bible;
+﻿
+
+namespace BibleWithAPI;
 
 public class RuBook : List<RuChapter>
 {
+    public static List<RuChapter> book = new List<RuChapter>();
+    public string bookName =  book[0].bookName;
     
     public static List<RuBook> Makebooks(List<RuChapter> chapters)
     {

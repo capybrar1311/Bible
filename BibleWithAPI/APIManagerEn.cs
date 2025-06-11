@@ -1,8 +1,6 @@
 ﻿using System.Text.Json;
 
-
-
-namespace Bible;
+namespace BibleWithAPI;
 
 public class APIManagerEn
 {
@@ -15,7 +13,7 @@ public class APIManagerEn
             string requestUrl = $"https://bible-api.com/{userInput}?translation=web";
             var response = await Menu.client.GetStringAsync(requestUrl);
 
-            var verse = JsonSerializer.Deserialize<EnBible>(response, EnJsonContext.Default.EnBible);
+            var verse = JsonSerializer.Deserialize<EnBible>(response, BibleWithAPI.EnJsonContext.Default.EnBible);
             PrintTheVerses(verse.Verses);
         }
         catch (Exception e)

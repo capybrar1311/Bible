@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Bible;
+namespace BibleWithAPI;
 
 [JsonSerializable(typeof(EnBible))]
 public partial class EnJsonContext : JsonSerializerContext;
