@@ -23,9 +23,8 @@ public class Menu
                 break;
             case "ru":
                 Console.Write("Введите книгу и номер стиха ");
-                //res = Console.ReadLine();
-                RuBibleManager.ManageTheVerses();
-                //if (res == "") return "Бытие 3:1";
+                
+                RuBibleManager.GetData(Console.ReadLine()).GetAwaiter().GetResult();
                 
                 break;
         }

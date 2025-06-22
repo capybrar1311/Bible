@@ -1,31 +1,38 @@
-﻿namespace BibleWithAPI;
-using Newtonsoft.Json;
+﻿using System.Text.Json;
+
+namespace BibleWithAPI;
+
 public class RuBibleManager
 {
-    public static void ManageTheVerses()
-    {
-        //List<string?> Verses = new List<string?>();
-        var json = File.ReadAllText("rst.json");
-        if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), $"synodal.json")))
-        {
-            Console.WriteLine("File not found");
-        }
-        RuBibleVerse[] allVerses = JsonConvert.DeserializeObject<RuBibleVerse[]>(json);
+    
 
-        List<RuBook> Bible = new List<RuBook>();
-        foreach (RuBibleVerse verse in allVerses)
+    public static async Task GetData(string userInput)
+    {
+        try
         {
-            RuBook book = Bible.Find(b => b.Id == verse.BookName);
-            if (book.Name == null)
-            {
-                book = new RuBook { Id = verse.BookName, Name = verse.BookName };
-                Bible.Add(book);
-            }
+            string requestUrl = $"https://justbible.ru/api/bible?translation=nasb&book=43&chapter=3&verses=16";
             
-            book.AddVerse(verse);
+            var response = await Menu.client.GetStringAsync(requestUrl);
+
+            var verse = ParseFullJson(response);
+            PrintTheVerses(verse);
         }
-        Console.WriteLine($"Загружено книг: {Bible.Count}");
-        Console.WriteLine($"Например, в книге 'Genesis' глав: {Bible[0].book.Count}");
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Console.ReadLine();
+            throw;
+        }
     }
     
+    private static void PrintTheVerses(RuBible vvv)
+    {
+        Console.WriteLine(vvv.Info.Verse);
+    }
+    
+    private static RuBible ParseFullJson(string json)
+    {
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        return JsonSerializer.Deserialize<RuBible>(json, options);
+    }
 }
