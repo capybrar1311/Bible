@@ -114,20 +114,18 @@ public class RuBibleManager
     };
 
         List<string> books = SynodalBooks.Keys.ToList();
-        string findBook = @"([1-9]?|[Оотт]{2})\s?[А-Яа-яЁё]{1,15}";
-        string findChapterAndVerse = @"[0-9]{1,3}:?[0-9]{0,3}";
+        string[] splitedInput = userInput.Split(' ');
+        if (splitedInput.Length == 3)
+        {
+            splitedInput[0] = $"{splitedInput[0]} {splitedInput[1]}";
+            splitedInput[1] = splitedInput[2];
+        }
+        string[] chapterAndVerse = splitedInput[2].Split(':');
+        int splitedChapter = int.Parse(chapterAndVerse[0]);
+        int splitedVerse = int.Parse(chapterAndVerse[1]);
 
         
-        Match book = Regex.Match(userInput, findBook);
-        Match chapterAndVerse = Regex.Match(userInput, findChapterAndVerse);
-        string chapter = chapterAndVerse.Groups[1].Value;
-        
-
-
-
         return $"https://justbible.ru/api/bible?translation=rst&book=43&chapter=1&verses=1,3,14";
         
-        
-
     }
 }
