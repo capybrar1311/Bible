@@ -120,12 +120,17 @@ public class RuBibleManager
             splitedInput[0] = $"{splitedInput[0]} {splitedInput[1]}";
             splitedInput[1] = splitedInput[2];
         }
-        string[] chapterAndVerse = splitedInput[2].Split(':');
+        string[] chapterAndVerse = splitedInput[1].Split(':');
+        if (!books.Contains(splitedInput[0]))
+        {
+            throw new Exception("Book not found");
+        }
+        
+        int splitedBook = SynodalBooks[splitedInput[0]];
         int splitedChapter = int.Parse(chapterAndVerse[0]);
         int splitedVerse = int.Parse(chapterAndVerse[1]);
-
         
-        return $"https://justbible.ru/api/bible?translation=rst&book=43&chapter=1&verses=1,3,14";
+        return $"https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedChapter}&verse={splitedVerse}";
         
     }
 }
