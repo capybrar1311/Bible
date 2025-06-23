@@ -1,11 +1,49 @@
 
+using System.Text;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace BibleWithAPI;
 
 public class RuBibleManager
 {
-    public static readonly Dictionary<string, int> SynodalBooks = new Dictionary<string, int>
+
+
+    public static async Task GetData(string userInput)
+    {
+        try
+        {
+            string requestUrl = CreateRequestUrl(userInput);
+
+            var response = await Menu.client.GetStringAsync(requestUrl);
+
+            var verse = ParseFullJson(response);
+            PrintTheVerses(verse);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Console.ReadLine();
+            throw;
+        }
+    }
+
+    private static void PrintTheVerses(RuBible vvv)
+    {
+        foreach (var verse in vvv.Verses)
+        {
+            Console.WriteLine($"{vvv.Info.Book} {vvv.Info.Chapter}:{verse.Key} {verse.Value}");
+        }
+    }
+
+    private static RuBible ParseFullJson(string json)
+    {
+        return JsonConvert.DeserializeObject<RuBible>(json);
+    }
+
+    private static string CreateRequestUrl(string userInput)
+    {
+        Dictionary<string, int> SynodalBooks = new Dictionary<string, int>
     {
         {"Бытие", 1},
         {"Исход", 2},
@@ -75,35 +113,21 @@ public class RuBibleManager
         {"Откровение", 66}
     };
 
-    public static async Task GetData(string userInput)
-    {
-        try
-        {
-            string requestUrl = $"https://justbible.ru/api/bible?translation=rst&book=43&chapter=1&verses=1,3,14";
-            
-            var response = await Menu.client.GetStringAsync(requestUrl);
+        List<string> books = SynodalBooks.Keys.ToList();
+        string findBook = @"([1-9]?|[Оотт]{2})\s?[А-Яа-яЁё]{1,15}";
+        string findChapterAndVerse = @"[0-9]{1,3}:?[0-9]{0,3}";
 
-            var verse = ParseFullJson(response);
-            PrintTheVerses(verse);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            Console.ReadLine();
-            throw;
-        }
-    }
-    
-    private static void PrintTheVerses(RuBible vvv)
-    {
-        foreach (var verse in vvv.Verses)
-        {
-            Console.WriteLine($"{vvv.Info.Book} {vvv.Info.Chapter}:{verse.Key} {verse.Value}");
-        }
-    }
-    
-    private static RuBible ParseFullJson(string json)
-    {
-        return JsonConvert.DeserializeObject<RuBible>(json);
+        
+        Match book = Regex.Match(userInput, findBook);
+        Match chapterAndVerse = Regex.Match(userInput, findChapterAndVerse);
+        string chapter = chapterAndVerse.Groups[1].Value;
+        
+
+
+
+        return $"https://justbible.ru/api/bible?translation=rst&book=43&chapter=1&verses=1,3,14";
+        
+        
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace BibleWithAPI;
+﻿using System.Text;
+
+namespace BibleWithAPI;
 
 public class Menu
 {
@@ -17,14 +19,15 @@ public class Menu
         {
             case "en":
                 Console.Write("Enter book and verse number ");
-                Console.ReadLine();
+
+                
                 if (res == "") return "john 3:16";
                 APIManagerEn.GetData(res).GetAwaiter().GetResult();
                 break;
             case "ru":
                 Console.Write("Введите книгу и номер стиха ");
-                
-                RuBibleManager.GetData(Console.ReadLine()).GetAwaiter().GetResult();
+                string input = Console.ReadLine();
+                RuBibleManager.GetData(input).GetAwaiter().GetResult();
                 
                 break;
         }
