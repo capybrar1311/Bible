@@ -1,8 +1,10 @@
 ﻿using System.Text.Json;
 
-namespace BibleWithAPI;
 
-public class EnBibleManager
+
+namespace Bible;
+
+public class APIManagerEn
 {
     
 

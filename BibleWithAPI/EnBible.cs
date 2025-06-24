@@ -1,6 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace Bible;
 
-namespace BibleWithAPI;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 public class EnBible
 {

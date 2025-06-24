@@ -1,4 +1,4 @@
-﻿namespace BibleWithAPI;
+﻿namespace Bible;
 
 //иоанн 3:16
 //john 3:16-19

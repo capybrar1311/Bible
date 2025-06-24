@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace BibleWithAPI;
+namespace Bible;
 
 [JsonSerializable(typeof(EnBible))]
 public partial class EnJsonContext : JsonSerializerContext;
 
-[JsonSerializable(typeof(RuBible))]
+[JsonSerializable(typeof(RuBibleVerse))]
 public partial class RuJsonContext : JsonSerializerContext;
