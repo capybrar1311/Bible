@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace BibleWithAPI;
+﻿namespace BibleWithAPI;
 
 public class Menu
 {
@@ -17,6 +15,8 @@ public class Menu
                 return "ru";
             case "en":
                 return "en";
+            case "exit":
+                return "exit";
             default:
                 return "ru";
         }
@@ -40,6 +40,7 @@ public class Menu
                 RuBibleManager.GetData(input).GetAwaiter().GetResult();
                 
                 break;
+
         }
 
         return res;
