@@ -2,7 +2,7 @@
 
 namespace BibleWithAPI;
 
-public class APIManagerEn
+public class EnBibleManager
 {
     
 

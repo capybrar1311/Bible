@@ -9,7 +9,17 @@ public class Menu
     {
         Console.Write("Enter language (\"ru\", \"en\")");
 
-        return Console.ReadLine();
+        string lang = Console.ReadLine();
+        
+        switch (lang)
+        {
+            case "ru":
+                return "ru";
+            case "en":
+                return "en";
+            default:
+                return "ru";
+        }
     }
 
     public static string? GetVerseNumber(string? language)
@@ -19,14 +29,14 @@ public class Menu
         {
             case "en":
                 Console.Write("Enter book and verse number ");
-
-                
+                res = Console.ReadLine();
                 if (res == "") return "john 3:16";
-                APIManagerEn.GetData(res).GetAwaiter().GetResult();
+                EnBibleManager.GetData(res).GetAwaiter().GetResult();
                 break;
             case "ru":
                 Console.Write("Введите книгу и номер стиха ");
                 string input = Console.ReadLine();
+                if (input == "") input = "Иоанн 3:16";
                 RuBibleManager.GetData(input).GetAwaiter().GetResult();
                 
                 break;
