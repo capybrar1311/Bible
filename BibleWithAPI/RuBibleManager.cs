@@ -6,6 +6,8 @@ namespace BibleWithAPI;
 
 public class RuBibleManager
 {
+    private static string lastRequest;
+
     public static async Task GetData(string userInput)
     {
         try
@@ -123,6 +125,7 @@ public class RuBibleManager
         string defaultUrl =
             "https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedChapter}";
         string actualUrl = defaultUrl;
+        lastRequest = userInput;
         string[] splitedInput = userInput.Split(' ');
 
         if (splitedInput.Length == 3)
@@ -151,6 +154,8 @@ public class RuBibleManager
                         $"https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedChapter}&verse={splitedVerse}";
                 }
             }
+            
+
             else
             {
                 actualUrl =
