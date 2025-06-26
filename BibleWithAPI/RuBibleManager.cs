@@ -19,9 +19,18 @@ public class RuBibleManager
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            Console.ReadLine();
-            throw;
+            Console.WriteLine("НЕТ ТАКОЙ КНИГИ!!! ВВОДИ НОВУЮ!!!");
+            string newInp = Console.ReadLine();
+            switch (newInp)
+            {
+                case "":
+                    newInp = "Иоанн 3:16";
+                    break;
+                default:
+                     break;   
+            }
+
+            await GetData(newInp);
         }
     }
 
@@ -60,7 +69,7 @@ public class RuBibleManager
             { "Неемия", 16 },
             { "Есфирь", 17 },
             { "Иов", 18 },
-            { "Псалмы", 19 },
+            { "Псалтырь", 19 },
             { "Притчи", 20 },
             { "Екклезиаст", 21 },
             { "Песнь Песней", 22 },
@@ -123,37 +132,37 @@ public class RuBibleManager
         }
 
 
-        if (!books.Contains(splitedInput[0]))
-        {
-            throw new Exception("Book not found");
-        }
-
         int splitedBook = SynodalBooks[splitedInput[0]];
-        
-
-        if (splitedInput[1].Contains(":"))
+        try
         {
-            string[] chapterAndVerse = splitedInput[1].Split(':');
-            string splitedChapter = chapterAndVerse[0];
-            string splitedVerse = chapterAndVerse[1];
-            if (splitedVerse.Contains("-") | splitedVerse.Contains(","))
+            if (splitedInput[1].Contains(":"))
             {
-                actualUrl =
-                    $"https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedChapter}&verses={splitedVerse}";
+                string[] chapterAndVerse = splitedInput[1].Split(':');
+                string splitedChapter = chapterAndVerse[0];
+                string splitedVerse = chapterAndVerse[1];
+                if (splitedVerse.Contains("-") | splitedVerse.Contains(","))
+                {
+                    actualUrl =
+                        $"https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedChapter}&verses={splitedVerse}";
+                }
+                else
+                {
+                    actualUrl =
+                        $"https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedChapter}&verse={splitedVerse}";
+                }
             }
             else
             {
                 actualUrl =
-                    $"https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedChapter}&verse={splitedVerse}";
+                    $"https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedInput[1]}";
             }
-              
-
         }
-        else
+        catch (Exception e)
         {
-            actualUrl =
-                $"https://justbible.ru/api/bible?translation=rst&book={splitedBook}&chapter={splitedInput[1]}";
+            Console.WriteLine(e);
+            return CreateRequestUrl(Console.ReadLine());
         }
+
 
         return actualUrl;
     }
