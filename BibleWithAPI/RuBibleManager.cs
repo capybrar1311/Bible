@@ -127,6 +127,7 @@ public class RuBibleManager
         string actualUrl = defaultUrl;
         lastRequest = userInput;
         string[] splitedInput = userInput.Split(' ');
+        splitedInput[0] = splitedInput[0].ToLower();
 
         if (splitedInput.Length == 3)
         {
