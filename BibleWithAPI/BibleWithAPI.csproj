@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3" />
+      <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
     </ItemGroup>
 
 </Project>
